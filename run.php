@@ -5,10 +5,10 @@ $teams = [
     "LDLC" => 10,
     "GAMEWARD" => 8,
     "BDS" => 8,
-    "TEAMGO" => 8,
-    "SOLARY" => 7,
+    "TEAMGO" => 9,
+    "SOLARY" => 8,
     "VITALITY" => 7,
-    "AEGIS" => 6,
+    "AEGIS" => 7,
     "KCORP" => 5,
     "BKROG" => 5,
     "IZIDREAM" => 2,
@@ -16,9 +16,6 @@ $teams = [
 
 
 $matchs = [
-    ["BDS" => "AEGIS"],
-    ["TEAMGO" => "GAMEWARD"],
-    ["SOLARY" => "KCORP"],
     ["VITALITY" => "IZIDREAM"],
     ["LDLC" => "KCORP"],
     ["GAMEWARD" => "BKROG"],
