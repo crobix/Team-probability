@@ -89,6 +89,8 @@ for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
             $teamsQualified[$teamQualified] = 1;
         }
     }
+
+    echo "Progress: " . round($i / $total * 100, 2) . "%   \r";
 }
 
 echo number_format($total, 0, ', ', ' ') . " trouvées\n";
