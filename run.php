@@ -46,7 +46,7 @@ $matchs = [
 // PARAMETRES
 
 
-echo "Analyse pour les " . \count($matchs) . " prochains matchs\n";
+echo "Analyse pour les " . \count($matchs) . " matchs restants\n";
 echo "Calcul des possibilités ...\n";
 
 //Nombre de possibilités
@@ -90,7 +90,7 @@ for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
         }
     }
 
-    echo "Progress: " . round($i / $total * 100, 2) . "%   \r";
+    echo "Progress: " . round($i / $total * 100, 2) . "%\r";
 }
 
 echo number_format($total, 0, ', ', ' ') . " trouvées\n";
