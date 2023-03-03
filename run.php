@@ -10,13 +10,12 @@ $teams = [
     "VITALITY" => 7,
     "AEGIS" => 6,
     "KCORP" => 5,
-    "BKROG" => 4,
+    "BKROG" => 5,
     "IZIDREAM" => 2,
 ];
 
 
 $matchs = [
-    ["BKROG" => "LDLC"],
     ["BDS" => "AEGIS"],
     ["TEAMGO" => "GAMEWARD"],
     ["SOLARY" => "KCORP"],
@@ -99,7 +98,7 @@ echo "Génération des stats ...\n";
 $stats = [];
 //calcul de nombre de fois ou l'equipe a pu se qualifier
 foreach ($teamsQualified as $team => $numberQualified) {
-    $stats[$team] = round(($numberQualified / $total) * 100, 2);
+    $stats[$team] = round(($numberQualified / $total) * 100, 2, PHP_ROUND_HALF_DOWN);
 }
 uasort($stats, function ($a, $b) {
     return ($a > $b) ? -1 : 1;
@@ -107,5 +106,5 @@ uasort($stats, function ($a, $b) {
 
 echo "Chances de qualification ...\n";
 foreach ($stats as $team => $stat) {
-    echo $team . ' => ' . ($stat >= 100 ? "Qualifié" : $stat <= 0 ? "Out" : $stat . "%") . "\n";
+    echo $team . ' => ' . ($stat <= 0 ? "Out" : $stat . "%") . "\n";
 }
