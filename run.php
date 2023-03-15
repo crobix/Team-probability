@@ -5,18 +5,17 @@ $teams = [
     "LDLC" => 10,
     "TEAMGO" => 10,
     "VITALITY" => 9,
-    "BDS" => 9,
+    "AEGIS" => 9,
     "GAMEWARD" => 9,
+    "BDS" => 9,
     "SOLARY" => 8,
-    "AEGIS" => 8,
+    "BKROG" => 8,
     "KCORP" => 7,
-    "BKROG" => 7,
     "IZIDREAM" => 2,
 ];
 
 
 $matchs = [
-    ["IZIDREAM" => "BKROG"],
     ["VITALITY" => "LDLC"],
     ["KCORP" => "AEGIS"],
     ["SOLARY" => "TEAMGO"],
@@ -44,9 +43,9 @@ for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
     //ajoute les resultat du match au classement
     foreach ($matchsResult as $index => $match) {
         if ($match === "0") {
-            $probability[array_values($matchs[$index])[0]]++;
-        } else {
             $probability[array_keys($matchs[$index])[0]]++;
+        } else {
+            $probability[array_values($matchs[$index])[0]]++;
         }
     }
 
@@ -92,5 +91,5 @@ uasort($stats, function ($a, $b) {
 
 echo "Chances de qualification ...\n";
 foreach ($stats as $team => $stat) {
-    echo $team . ' => ' . ($stat <= 0 ? "Out" : $stat . "%") . "\n";
+    echo $team . ' => ' . ($stat <= 0 ? "Out" : $stat . "% (" . $teamsQualified[$team] . "/" . $total . ")") . "\n";
 }
