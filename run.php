@@ -5,10 +5,10 @@ $teams = [
     "LDLC" => 11,
     "TEAMGO" => 10,
     "VITALITY" => 9,
-    "AEGIS" => 9,
-    "GAMEWARD" => 9,
-    "BDS" => 9,
-    "SOLARY" => 8,
+    "AEGIS" => 10,
+    "GAMEWARD" => 10,
+    "BDS" => 10,
+    "SOLARY" => 9,
     "BKROG" => 8,
     "KCORP" => 7,
     "IZIDREAM" => 2,
@@ -16,9 +16,6 @@ $teams = [
 
 
 $matchs = [
-    ["KCORP" => "AEGIS"],
-    ["SOLARY" => "TEAMGO"],
-    ["BDS" => "GAMEWARD"],
     ["IZIDREAM" => "GAMEWARD"],
     ["AEGIS" => "VITALITY"],
     ["KCORP" => "TEAMGO"],
@@ -65,7 +62,7 @@ for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
     }
 
     $lengthNoTie = $qualified;
-    for ($k = $lengthNoTie + 1; $k > 1; $k--){
+    for ($k = $lengthNoTie; $k >= 1; $k--){
         $points = array_values($probability);
         if ($points[$k] !== $points[$k - 1]) {
             break;
