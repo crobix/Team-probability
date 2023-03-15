@@ -35,6 +35,7 @@ echo "Calcul des possibilités ...\n";
 //Nombre de possibilités
 $total = pow(2, \count($matchs));
 $teamsQualified = [];
+$teamsQualifiedNoTie = [];
 for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
     $probability = $teams;
     $matchsResult = str_split(str_pad(decbin($i), \count($matchs), '0', STR_PAD_LEFT));
@@ -63,6 +64,24 @@ for ($i = 0; $i < pow(2, \count($matchs)); $i++) {
         $length++;
     }
 
+    $lengthNoTie = $qualified;
+    for ($k = $lengthNoTie + 1; $k > 1; $k--){
+        $points = array_values($probability);
+        if ($points[$k] !== $points[$k - 1]) {
+            break;
+        }
+        $lengthNoTie--;
+    }
+
+    $resultNoTie = array_slice($probability, 0, $lengthNoTie, true);
+    foreach ($resultNoTie as $teamQualified => $points) {
+        if (array_key_exists($teamQualified, $teamsQualifiedNoTie)) {
+            $teamsQualifiedNoTie[$teamQualified]++;
+        } else {
+            $teamsQualifiedNoTie[$teamQualified] = 1;
+        }
+    }
+
     //si qualifié ajoute l'equipe dans un tableau de qualification
     $result = array_slice($probability, 0, $length, true);
     foreach ($result as $teamQualified => $points) {
@@ -82,7 +101,8 @@ echo "Génération des stats ...\n";
 $stats = [];
 //calcul de nombre de fois ou l'equipe a pu se qualifier
 foreach ($teamsQualified as $team => $numberQualified) {
-    $stats[$team] = round(($numberQualified / $total) * 100, 2, PHP_ROUND_HALF_DOWN);
+    $stats[$team][] =  array_key_exists($team, $teamsQualifiedNoTie) ? round(($teamsQualifiedNoTie[$team] / $total) * 100, 2, PHP_ROUND_HALF_DOWN): 0;
+    $stats[$team][] = round(($numberQualified / $total) * 100, 2, PHP_ROUND_HALF_DOWN);
 }
 uasort($stats, function ($a, $b) {
     return ($a > $b) ? -1 : 1;
@@ -90,5 +110,8 @@ uasort($stats, function ($a, $b) {
 
 echo "Chances de qualification ...\n";
 foreach ($stats as $team => $stat) {
-    echo $team . ' => ' . ($stat <= 0 ? "Out" : $stat . "% (" . $teamsQualified[$team] . "/" . $total . ")") . "\n";
+    echo $team ."\n";
+    echo "Sans TieBreak => ".($stat[0] <= 0 ? "Out" : $stat[0] . "% (" . $teamsQualifiedNoTie[$team] . "/" . $total . ")") . "\n";
+    echo "Avec TieBreak => ".($stat[1] <= 0 ? "Out" : $stat[1] . "% (" . $teamsQualified[$team] . "/" . $total . ")") . "\n";
+    echo "\n";
 }
