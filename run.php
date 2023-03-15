@@ -2,7 +2,7 @@
 // PARAMETRES
 $qualified = 6;
 $teams = [
-    "LDLC" => 10,
+    "LDLC" => 11,
     "TEAMGO" => 10,
     "VITALITY" => 9,
     "AEGIS" => 9,
@@ -16,7 +16,6 @@ $teams = [
 
 
 $matchs = [
-    ["VITALITY" => "LDLC"],
     ["KCORP" => "AEGIS"],
     ["SOLARY" => "TEAMGO"],
     ["BDS" => "GAMEWARD"],
