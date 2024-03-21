@@ -66,7 +66,7 @@ class TweetCommand extends Command
         }
 
         $matchesData = array_filter($events, function (array $element) {
-            return $element['state'] !== 'completed' && isset($element['match']);
+            return $element['state'] !== 'completed' && str_starts_with($element['blockName'], 'Semaine')  && isset($element['match']);
         });
 
         if (empty($matchesData)) {
